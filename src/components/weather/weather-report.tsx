@@ -7,19 +7,16 @@ import { WeekForecast } from "./week-forecast";
 import s from "./weather-report.module.scss";
 export default function WeatherReport() {
   return (
-    <div>
-      <SearchBar />
+    <div className={s.report}>
+      <div className={s.main}>
+        <SearchBar />
+        <CurrentWeather />
+        <TodayForecast />
+        <AirConditions />
+      </div>
 
-      <div className={s.report}>
-        <div className={s.main}>
-          <CurrentWeather />
-          <TodayForecast />
-          <AirConditions />
-        </div>
-
-        <div className={s.side}>
-          <WeekForecast />
-        </div>
+      <div className={s.side}>
+        <WeekForecast />
       </div>
     </div>
   );
