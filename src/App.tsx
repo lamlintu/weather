@@ -1,5 +1,7 @@
+import WeatherReport from "./components/weather/weather-report";
+
 function App() {
-  return <h1>Weather</h1>;
+  return <WeatherReport />;
 }
 
 export default App;
