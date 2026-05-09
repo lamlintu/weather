@@ -1,0 +1,18 @@
+.report {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 1.5rem;
+
+  @media (max-width: 56em) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.side {
+  padding-top: 1rem;
+}

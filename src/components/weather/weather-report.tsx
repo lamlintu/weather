@@ -4,14 +4,23 @@ import { SearchBar } from "./search-bar";
 import { TodayForecast } from "./today-forecast";
 import { WeekForecast } from "./week-forecast";
 
+import s from "./weather-report.module.scss";
 export default function WeatherReport() {
   return (
     <div>
       <SearchBar />
-      <CurrentWeather />
-      <TodayForecast />
-      <AirConditions />
-      <WeekForecast />
+
+      <div className={s.report}>
+        <div className={s.main}>
+          <CurrentWeather />
+          <TodayForecast />
+          <AirConditions />
+        </div>
+
+        <div className={s.side}>
+          <WeekForecast />
+        </div>
+      </div>
     </div>
   );
 }
