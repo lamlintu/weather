@@ -1,0 +1,42 @@
+$alignments: center, flex-start, flex-end, baseline, space-around;
+$justifications:
+  center, flex-start, flex-end, space-between, space-around, space-evenly;
+$spacer: 0.5rem;
+
+.grid {
+  display: grid;
+}
+
+.flex {
+  display: flex;
+}
+
+@each $value in $alignments {
+  .align-#{$value} {
+    align-items: $value;
+  }
+
+  .align-content-#{$value} {
+    align-content: $value;
+  }
+
+  .align-self-#{$value} {
+    align-self: $value;
+  }
+}
+
+@each $value in $justifications {
+  .justify-#{$value} {
+    justify-content: $value;
+  }
+
+  .justify-self-#{$value} {
+    justify-self: $value;
+  }
+}
+
+@for $i from 0 through 3 {
+  .gap-#{$i} {
+    gap: $i * $spacer;
+  }
+}
