@@ -1,6 +1,6 @@
 .report {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 2fr 1fr;
   padding: 1.5rem;
 
   @media (max-width: 56em) {
