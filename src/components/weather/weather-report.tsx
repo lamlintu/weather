@@ -1,16 +1,17 @@
-import { AirConditions } from "./air-conditions";
-import { CurrentWeather } from "./current-weather";
-import { SearchBar } from "./search-bar";
-import { TodayForecast } from "./today-forecast";
-
-import s from "./weather-report.module.scss";
-import { useWeather } from "../hooks/use-weather";
-import WeekForecast from "./week-forecast";
+import { useState } from "react";
 import {
   SegmentedControl,
   SegmentedControlItem,
 } from "../common/segmented-control";
-import { useState } from "react";
+import { useWeather } from "../hooks/use-weather";
+
+import { AirConditions } from "./air-conditions";
+import { CurrentWeather } from "./current-weather";
+import { SearchBar } from "./search-bar";
+import { TodayForecast } from "./today-forecast";
+import { WeekForecast } from "./week-forecast";
+
+import s from "./weather-report.module.scss";
 
 type WeatherData = {
   current: {
@@ -36,6 +37,7 @@ export default function WeatherReport() {
     return <p>Loading</p>;
   }
 
+  const theme = data.current.is_day === 1 ? "light" : "dark";
   const timezone = data.timezone;
 
   const currentWeather = {
@@ -76,35 +78,35 @@ export default function WeatherReport() {
   }
 
   return (
-    <div className={s.report}>
-      <div className={s.main}>
-        <div className="flex justify-space-between">
-          <SearchBar />
-          <SegmentedControl>
-            <SegmentedControlItem
-              name="unit"
-              value="celsius"
-              label="°C"
-              checked={unit === "celsius"}
-              onChange={() => setUnit("celsius")}
-            />
+    <div className={s.theme} data-theme={theme}>
+      <div className={s.report} data-theme={theme}>
+        <div className={s.main}>
+          <div className="flex justify-space-between">
+            <SearchBar />
+            <SegmentedControl>
+              <SegmentedControlItem
+                name="unit"
+                value="celsius"
+                label="°C"
+                checked={unit === "celsius"}
+                onChange={() => setUnit("celsius")}
+              />
 
-            <SegmentedControlItem
-              name="unit"
-              value="fahrenheit"
-              label="°F"
-              checked={unit === "fahrenheit"}
-              onChange={() => setUnit("fahrenheit")}
-            />
-          </SegmentedControl>
+              <SegmentedControlItem
+                name="unit"
+                value="fahrenheit"
+                label="°F"
+                checked={unit === "fahrenheit"}
+                onChange={() => setUnit("fahrenheit")}
+              />
+            </SegmentedControl>
+          </div>
+
+          <CurrentWeather current={currentWeather} />
+          <TodayForecast hourly={data.hourly} timezone={timezone} unit={unit} />
+          <AirConditions data={getAirConditions(data)} />
         </div>
 
-        <CurrentWeather current={currentWeather} />
-        <TodayForecast hourly={data.hourly} timezone={timezone} unit={unit} />
-        <AirConditions data={getAirConditions(data)} />
-      </div>
-
-      <div className={s.side}>
         <WeekForecast daily={data.daily} unit={unit} />
       </div>
     </div>

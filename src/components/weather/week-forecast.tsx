@@ -12,7 +12,7 @@ type Props = {
   unit: "celsius" | "fahrenheit";
 };
 
-export default function WeekForecast({ daily, unit }: Props) {
+export function WeekForecast({ daily, unit }: Props) {
   const days = daily.time.map((date, index) => ({
     date,
     label:

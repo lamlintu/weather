@@ -1,3 +1,10 @@
+.theme {
+  background: var(--bg);
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100lvh;
+}
+
 .report {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -12,8 +19,4 @@
 .main {
   display: grid;
   gap: 1.5rem;
-}
-
-.side {
-  padding-top: 1rem;
 }
