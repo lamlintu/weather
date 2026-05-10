@@ -69,7 +69,7 @@ export function TodayForecast() {
         <div>
           <p>15:00</p>
           <img
-            src="src/assets/icons/cloudy.svg"
+            src="src/assets/icons/partly-cloudy.svg"
             alt="sunny"
             width={36}
             height={36}
