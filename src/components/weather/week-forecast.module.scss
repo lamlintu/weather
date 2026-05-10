@@ -9,10 +9,20 @@
   padding: 0;
   display: grid;
 }
-
 .listItem {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+
+  padding-block: 1rem;
+}
+
+.listItem > :last-child {
+  justify-self: end;
+}
+
+.icon {
+  justify-self: center;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1rem 0;
 }

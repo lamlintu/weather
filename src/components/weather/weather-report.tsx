@@ -2,10 +2,10 @@ import { AirConditions } from "./air-conditions";
 import { CurrentWeather } from "./current-weather";
 import { SearchBar } from "./search-bar";
 import { TodayForecast } from "./today-forecast";
-import { WeekForecast } from "./week-forecast";
 
 import s from "./weather-report.module.scss";
 import { useWeather } from "../hooks/use-weather";
+import WeekForecast from "./week-forecast";
 
 type WeatherData = {
   current: {
@@ -67,7 +67,7 @@ export default function WeatherReport() {
     };
   }
 
-  console.log(getAirConditions(data));
+  console.log(data);
 
   return (
     <div className={s.report}>
@@ -79,7 +79,7 @@ export default function WeatherReport() {
       </div>
 
       <div className={s.side}>
-        <WeekForecast />
+        <WeekForecast daily={data.daily} />
       </div>
     </div>
   );

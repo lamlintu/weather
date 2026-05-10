@@ -1,37 +1,45 @@
+import { WeatherIcon } from "./weather-icon";
 import s from "./week-forecast.module.scss";
-export function WeekForecast() {
+
+type Props = {
+  daily: {
+    time: string[];
+    temperature_2m_max: number[];
+    temperature_2m_min: number[];
+    weather_code: number[];
+  };
+};
+
+export default function WeekForecast({ daily }: Props) {
+  const days = daily.time.map((date, index) => ({
+    date,
+    label:
+      index === 0
+        ? "Today"
+        : new Date(date).toLocaleDateString("en-US", {
+            weekday: "short",
+          }),
+    max: daily.temperature_2m_max[index],
+    min: daily.temperature_2m_min[index],
+    code: daily.weather_code[index],
+  }));
+
+  console.log(days);
   return (
     <article className={s.container}>
       <h2>7-day forecast</h2>
       <ul className={s.list}>
-        <li className={s.listItem}>
-          <p>Today</p>
-          <p>15 °C</p>
-        </li>
-        <li className={s.listItem}>
-          <p>Tuesday</p>
-          <p>15 °C</p>
-        </li>
-        <li className={s.listItem}>
-          <p>Wednesday</p>
-          <p>15 °C</p>
-        </li>
-        <li className={s.listItem}>
-          <p>Thursday</p>
-          <p>15 °C</p>
-        </li>
-        <li className={s.listItem}>
-          <p>Friday</p>
-          <p>15 °C</p>
-        </li>
-        <li className={s.listItem}>
-          <p>Saturday</p>
-          <p>15 °C</p>
-        </li>
-        <li className={s.listItem}>
-          <p>Sunday</p>
-          <p>15 °C</p>
-        </li>
+        {days.map((day) => (
+          <li className={s.listItem}>
+            <p>{day.label}</p>
+            <span className={s.icon}>
+              <WeatherIcon code={day.code} isDay width={30} height={30} />
+            </span>
+            <p>
+              <strong>{Math.round(day.max)}</strong>/{Math.round(day.min)} °C
+            </p>
+          </li>
+        ))}
       </ul>
     </article>
   );
