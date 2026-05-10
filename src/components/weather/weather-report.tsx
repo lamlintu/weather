@@ -6,6 +6,11 @@ import { TodayForecast } from "./today-forecast";
 import s from "./weather-report.module.scss";
 import { useWeather } from "../hooks/use-weather";
 import WeekForecast from "./week-forecast";
+import {
+  SegmentedControl,
+  SegmentedControlItem,
+} from "../common/segmented-control";
+import { useState } from "react";
 
 type WeatherData = {
   current: {
@@ -24,7 +29,8 @@ type WeatherData = {
 };
 
 export default function WeatherReport() {
-  const { data, isLoading } = useWeather(60.1695, 24.9354);
+  const [unit, setUnit] = useState<"celsius" | "fahrenheit">("celsius");
+  const { data, isLoading } = useWeather(60.1695, 24.9354, unit);
 
   if (isLoading) {
     return <p>Loading</p>;
@@ -72,14 +78,34 @@ export default function WeatherReport() {
   return (
     <div className={s.report}>
       <div className={s.main}>
-        <SearchBar />
+        <div className="flex justify-space-between">
+          <SearchBar />
+          <SegmentedControl>
+            <SegmentedControlItem
+              name="unit"
+              value="celsius"
+              label="°C"
+              checked={unit === "celsius"}
+              onChange={() => setUnit("celsius")}
+            />
+
+            <SegmentedControlItem
+              name="unit"
+              value="fahrenheit"
+              label="°F"
+              checked={unit === "fahrenheit"}
+              onChange={() => setUnit("fahrenheit")}
+            />
+          </SegmentedControl>
+        </div>
+
         <CurrentWeather current={currentWeather} />
-        <TodayForecast hourly={data.hourly} timezone={timezone} />
+        <TodayForecast hourly={data.hourly} timezone={timezone} unit={unit} />
         <AirConditions data={getAirConditions(data)} />
       </div>
 
       <div className={s.side}>
-        <WeekForecast daily={data.daily} />
+        <WeekForecast daily={data.daily} unit={unit} />
       </div>
     </div>
   );

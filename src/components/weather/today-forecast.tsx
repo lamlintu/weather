@@ -1,3 +1,4 @@
+import { getTemperatureUnitLabel } from "./helpers";
 import s from "./today-forecast.module.scss";
 import { WeatherIcon } from "./weather-icon";
 
@@ -9,11 +10,10 @@ type Props = {
     is_day: number[];
   };
   timezone: string;
+  unit: "celsius" | "fahrenheit";
 };
 
-export function TodayForecast({ hourly, timezone }: Props) {
-  console.log(123321, hourly);
-
+export function TodayForecast({ hourly, timezone, unit }: Props) {
   const currentHour = new Date();
   currentHour.setMinutes(0, 0, 0);
 
@@ -28,6 +28,7 @@ export function TodayForecast({ hourly, timezone }: Props) {
     .filter((hour) => new Date(hour.time) >= currentHour)
     .slice(0, 8);
 
+  console.log(1231321, unit);
   return (
     <article className={s.container}>
       <h2>Today's forecast</h2>
@@ -50,7 +51,9 @@ export function TodayForecast({ hourly, timezone }: Props) {
               height={36}
             />
 
-            <p>{Math.round(hour.temp)} °C</p>
+            <p>
+              {Math.round(hour.temp)} {getTemperatureUnitLabel(unit)}
+            </p>
           </div>
         ))}
       </div>

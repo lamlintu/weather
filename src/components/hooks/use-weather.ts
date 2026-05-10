@@ -3,9 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 const BASE_URL = "https://api.open-meteo.com/v1/forecast";
 const ONE_HOUR = 1000 * 60 * 60;
 
-export function useWeather(latitude: number, longitude: number) {
+export function useWeather(latitude: number, longitude: number, unit: string) {
   return useQuery({
-    queryKey: ["weather", latitude, longitude],
+    queryKey: ["weather", latitude, longitude, unit],
     queryFn: async () => {
       const params = new URLSearchParams({
         latitude: latitude.toString(),
@@ -26,6 +26,7 @@ export function useWeather(latitude: number, longitude: number) {
           "weather_code",
         ].join(","),
         timezone: "auto",
+        temperature_unit: unit,
       });
 
       const response = await fetch(`${BASE_URL}?${params}`);

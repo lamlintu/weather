@@ -1,3 +1,4 @@
+import { getTemperatureUnitLabel } from "./helpers";
 import { WeatherIcon } from "./weather-icon";
 import s from "./week-forecast.module.scss";
 
@@ -8,9 +9,10 @@ type Props = {
     temperature_2m_min: number[];
     weather_code: number[];
   };
+  unit: "celsius" | "fahrenheit";
 };
 
-export default function WeekForecast({ daily }: Props) {
+export default function WeekForecast({ daily, unit }: Props) {
   const days = daily.time.map((date, index) => ({
     date,
     label:
@@ -24,7 +26,7 @@ export default function WeekForecast({ daily }: Props) {
     code: daily.weather_code[index],
   }));
 
-  console.log(days);
+  console.log(1232313, unit);
   return (
     <article className={s.container}>
       <h2>7-day forecast</h2>
@@ -36,7 +38,8 @@ export default function WeekForecast({ daily }: Props) {
               <WeatherIcon code={day.code} isDay width={30} height={30} />
             </span>
             <p>
-              <strong>{Math.round(day.max)}</strong>/{Math.round(day.min)} °C
+              <strong>{Math.round(day.max)}</strong>/{Math.round(day.min)}{" "}
+              {getTemperatureUnitLabel(unit)}
             </p>
           </li>
         ))}

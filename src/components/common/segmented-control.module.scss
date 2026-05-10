@@ -1,0 +1,43 @@
+.wrapper {
+  display: inline-flex;
+
+  width: fit-content;
+  padding: 0.125rem;
+
+  background: #ddd;
+  border-radius: 0.5rem;
+}
+
+.item {
+  position: relative;
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.label {
+  display: block;
+
+  padding: 0.375rem 0.5rem;
+  border-radius: 0.375rem;
+
+  color: #475569;
+  cursor: pointer;
+
+  white-space: nowrap;
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+.input:checked + .label {
+  background: white;
+  color: #2563eb;
+}
+
+.input:focus-visible + .label {
+  outline: 0.125rem solid #0ea5e9;
+}
