@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import type { WeatherData } from "../../types/weather";
 
 const BASE_URL = "https://api.open-meteo.com/v1/forecast";
 const ONE_HOUR = 1000 * 60 * 60;
@@ -6,7 +7,7 @@ const ONE_HOUR = 1000 * 60 * 60;
 export function useWeather(latitude: number, longitude: number, unit: string) {
   return useQuery({
     queryKey: ["weather", latitude, longitude, unit],
-    queryFn: async () => {
+    queryFn: async (): Promise<WeatherData> => {
       const params = new URLSearchParams({
         latitude: latitude.toString(),
         longitude: longitude.toString(),

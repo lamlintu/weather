@@ -1,6 +1,7 @@
 import { getTemperatureUnitLabel } from "./helpers";
 import s from "./today-forecast.module.scss";
 import { WeatherIcon } from "./weather-icon";
+import type { TemperatureUnit } from "../../types/weather";
 
 type Props = {
   hourly: {
@@ -10,7 +11,7 @@ type Props = {
     is_day: number[];
   };
   timezone: string;
-  unit: "celsius" | "fahrenheit";
+  unit: TemperatureUnit;
 };
 
 export function TodayForecast({ hourly, timezone, unit }: Props) {
@@ -28,7 +29,6 @@ export function TodayForecast({ hourly, timezone, unit }: Props) {
     .filter((hour) => new Date(hour.time) >= currentHour)
     .slice(0, 8);
 
-  console.log(1231321, unit);
   return (
     <article className={s.container}>
       <h2>Today's forecast</h2>

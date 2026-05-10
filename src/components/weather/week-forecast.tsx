@@ -1,15 +1,11 @@
+import type { TemperatureUnit, WeatherData } from "../../types/weather";
 import { getTemperatureUnitLabel } from "./helpers";
 import { WeatherIcon } from "./weather-icon";
 import s from "./week-forecast.module.scss";
 
 type Props = {
-  daily: {
-    time: string[];
-    temperature_2m_max: number[];
-    temperature_2m_min: number[];
-    weather_code: number[];
-  };
-  unit: "celsius" | "fahrenheit";
+  daily: WeatherData["daily"];
+  unit: TemperatureUnit;
 };
 
 export function WeekForecast({ daily, unit }: Props) {
