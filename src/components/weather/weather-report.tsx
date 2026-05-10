@@ -30,6 +30,8 @@ export default function WeatherReport() {
     return <p>Loading</p>;
   }
 
+  const timezone = data.timezone;
+
   const currentWeather = {
     temp: data.current.temperature_2m,
     unit: data.current_units.temperature_2m,
@@ -67,14 +69,12 @@ export default function WeatherReport() {
     };
   }
 
-  console.log(data);
-
   return (
     <div className={s.report}>
       <div className={s.main}>
         <SearchBar />
         <CurrentWeather current={currentWeather} />
-        <TodayForecast />
+        <TodayForecast hourly={data.hourly} timezone={timezone} />
         <AirConditions data={getAirConditions(data)} />
       </div>
 

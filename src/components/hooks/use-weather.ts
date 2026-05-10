@@ -19,7 +19,7 @@ export function useWeather(latitude: number, longitude: number) {
           "weather_code",
           "pressure_msl",
         ].join(","),
-        hourly: ["temperature_2m", "weather_code"].join(","),
+        hourly: ["temperature_2m", "weather_code", "is_day"].join(","),
         daily: [
           "temperature_2m_max",
           "temperature_2m_min",
