@@ -56,6 +56,11 @@ export function SearchBar({ onSelect }: Props) {
 
   return (
     <div ref={wrapperRef} className={s.container}>
+      {isFetching && (
+        <div className="loader-center">
+          <div className="loader" />
+        </div>
+      )}
       <search>
         <form>
           <input
@@ -69,7 +74,6 @@ export function SearchBar({ onSelect }: Props) {
         </form>
       </search>
 
-      {isFetching && <span>Loading</span>}
       {data && query && (
         <ul className={s.dropdown}>
           {data.map((result) => (

@@ -24,7 +24,11 @@ export default function WeatherReport() {
   const { data, isLoading } = useWeather(coords.lat, coords.lon, unit);
 
   if (isLoading || !data) {
-    return <p>Loading</p>;
+    return (
+      <div className="loader-center">
+        <div className="loader" />;
+      </div>
+    );
   }
 
   const handleCitySelect = (result: GeoResult) => {
@@ -42,7 +46,6 @@ export default function WeatherReport() {
     isDay: data.current.is_day === 1,
   };
 
-  console.log("city", city);
   function getAirConditions(
     data: Pick<WeatherData, "current" | "current_units">,
   ) {
