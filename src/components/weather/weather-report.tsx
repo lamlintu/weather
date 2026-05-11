@@ -12,30 +12,25 @@ import { TodayForecast } from "./today-forecast";
 import { WeekForecast } from "./week-forecast";
 
 import s from "./weather-report.module.scss";
-
-type WeatherData = {
-  current: {
-    apparent_temperature: number;
-    relative_humidity_2m: number;
-    wind_speed_10m: number;
-    pressure_msl: number;
-  };
-
-  current_units: {
-    apparent_temperature: string;
-    relative_humidity_2m: string;
-    wind_speed_10m: string;
-    pressure_msl: string;
-  };
-};
+import type { GeoResult, WeatherData } from "../../types/weather";
 
 export default function WeatherReport() {
   const [unit, setUnit] = useState<"celsius" | "fahrenheit">("celsius");
-  const { data, isLoading } = useWeather(60.1695, 24.9354, unit);
+  const [coords, setCoords] = useState<{ lat: number; lon: number }>({
+    lat: 60.17,
+    lon: 24.94,
+  });
+  const [city, setCity] = useState("Helsinki, Finland");
+  const { data, isLoading } = useWeather(coords.lat, coords.lon, unit);
 
-  if (isLoading) {
+  if (isLoading || !data) {
     return <p>Loading</p>;
   }
+
+  const handleCitySelect = (result: GeoResult) => {
+    setCity(`${result.name}, ${result.country}`);
+    setCoords({ lat: result.latitude, lon: result.longitude });
+  };
 
   const theme = data.current.is_day === 1 ? "light" : "dark";
   const timezone = data.timezone;
@@ -47,7 +42,10 @@ export default function WeatherReport() {
     isDay: data.current.is_day === 1,
   };
 
-  function getAirConditions(data: WeatherData) {
+  console.log("city", city);
+  function getAirConditions(
+    data: Pick<WeatherData, "current" | "current_units">,
+  ) {
     const { current, current_units } = data;
 
     return {
@@ -81,8 +79,8 @@ export default function WeatherReport() {
     <div className={s.theme} data-theme={theme}>
       <div className={s.report} data-theme={theme}>
         <div className={s.main}>
-          <div className="flex justify-space-between">
-            <SearchBar />
+          <SearchBar onSelect={handleCitySelect} />
+          <div className="flex justify-flex-end">
             <SegmentedControl>
               <SegmentedControlItem
                 name="unit"
@@ -102,7 +100,7 @@ export default function WeatherReport() {
             </SegmentedControl>
           </div>
 
-          <CurrentWeather current={currentWeather} />
+          <CurrentWeather current={currentWeather} city={city} />
           <TodayForecast hourly={data.hourly} timezone={timezone} unit={unit} />
           <AirConditions data={getAirConditions(data)} />
         </div>

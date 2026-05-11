@@ -8,13 +8,14 @@ type Props = {
     code: number;
     isDay: boolean;
   };
+  city: string;
 };
 
-export function CurrentWeather({ current }: Props) {
+export function CurrentWeather({ current, city }: Props) {
   return (
     <div className={s.container}>
       <article>
-        <h2 className={s.title}>Helsinki</h2>
+        <h2 className={s.title}>{city}</h2>
         <p className={s.temp}>
           {Math.round(current.temp)} {current.unit}
         </p>

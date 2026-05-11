@@ -55,3 +55,12 @@ export interface WeatherData {
 }
 
 export type TemperatureUnit = "celsius" | "fahrenheit";
+
+export interface GeoResult {
+  id: number;
+  name: string;
+  country: string;
+  country_code: string;
+  latitude: number;
+  longitude: number;
+}
