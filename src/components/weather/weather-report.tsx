@@ -78,9 +78,7 @@ export default function WeatherReport() {
           />{" "}
         </div>
 
-        <div className={s.side}>
-          <WeekForecast daily={data.daily} unit={unit} />
-        </div>
+        <WeekForecast daily={data.daily} unit={unit} />
       </div>
     </div>
   );

@@ -20,10 +20,3 @@
   display: grid;
   gap: 1rem;
 }
-
-.main,
-.side {
-  @media (max-width: 56em) {
-    padding-right: 1.5rem;
-  }
-}
