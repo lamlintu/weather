@@ -29,13 +29,14 @@ export function TodayForecast({ hourly, timezone, unit }: Props) {
     .filter((hour) => new Date(hour.time) >= currentHour)
     .slice(0, 8);
 
+  console.log(nextHours);
   return (
     <article className={s.container}>
       <h2>Today's forecast</h2>
 
       <div className={s.list}>
         {nextHours.map((hour) => (
-          <div className={s.listItem}>
+          <div key={hour.time} className={s.listItem}>
             <p>
               {new Date(hour.time).toLocaleTimeString("fi-FI", {
                 hour: "2-digit",

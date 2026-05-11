@@ -26,7 +26,7 @@ export default function WeatherReport() {
   if (isLoading || !data) {
     return (
       <div className="loader-center">
-        <div className="loader" />;
+        <div className="loader" />
       </div>
     );
   }

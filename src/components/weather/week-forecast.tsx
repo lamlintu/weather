@@ -22,13 +22,13 @@ export function WeekForecast({ daily, unit }: Props) {
     code: daily.weather_code[index],
   }));
 
-  console.log(1232313, unit);
+  console.log(1232313, days);
   return (
     <article className={s.container}>
       <h2>7-day forecast</h2>
       <ul className={s.list}>
         {days.map((day) => (
-          <li className={s.listItem}>
+          <li key={day.date} className={s.listItem}>
             <p>{day.label}</p>
             <span className={s.icon}>
               <WeatherIcon code={day.code} isDay width={30} height={30} />
