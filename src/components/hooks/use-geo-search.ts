@@ -24,7 +24,7 @@ const fetchGeoResults = async (city: string): Promise<GeoResult[]> => {
   if (!res.ok) throw new Error("Failed to fetch geo");
 
   const data = await res.json();
-  return data.results;
+  return data.results ?? [];
 };
 
 export const useGeoSearch = (city: string) =>

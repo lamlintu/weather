@@ -30,6 +30,7 @@ export function SearchBar({ onSelect }: Props) {
 
   const handleInputChange = (value: string) => {
     setInput(value);
+
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => setQuery(value), 400);
   };
@@ -41,17 +42,32 @@ export function SearchBar({ onSelect }: Props) {
     onSelect(result);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!data || !query) return;
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (data[0]) handleSelect(data[0]);
+    } else if (e.key === "Escape") {
+      setQuery("");
+    }
+  };
+
   const { data, isFetching } = useGeoSearch(query);
-  console.log(123, data);
+
   return (
     <div ref={wrapperRef} className={s.container}>
-      <input
-        type="search"
-        value={input}
-        className={s.searchInput}
-        onChange={(e) => handleInputChange(e.target.value)}
-        placeholder="Search for a city"
-      />
+      <search>
+        <form>
+          <input
+            type="search"
+            value={input}
+            className={s.searchInput}
+            onChange={(e) => handleInputChange(e.target.value)}
+            placeholder="Search for a city"
+            onKeyDown={handleKeyDown}
+          />
+        </form>
+      </search>
 
       {isFetching && <span>Loading</span>}
       {data && query && (
