@@ -108,7 +108,9 @@ export default function WeatherReport() {
           <AirConditions data={getAirConditions(data)} />
         </div>
 
-        <WeekForecast daily={data.daily} unit={unit} />
+        <div className={s.side}>
+          <WeekForecast daily={data.daily} unit={unit} />
+        </div>
       </div>
     </div>
   );
