@@ -18,7 +18,7 @@ export function useWeather(latitude: number, longitude: number, unit: string) {
           "wind_speed_10m",
           "is_day",
           "weather_code",
-          "pressure_msl",
+          "precipitation_probability",
         ].join(","),
         hourly: ["temperature_2m", "weather_code", "is_day"].join(","),
         daily: [

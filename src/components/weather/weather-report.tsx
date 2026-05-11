@@ -12,7 +12,7 @@ import { TodayForecast } from "./today-forecast";
 import { WeekForecast } from "./week-forecast";
 
 import s from "./weather-report.module.scss";
-import type { GeoResult, WeatherData } from "../../types/weather";
+import type { GeoResult } from "../../types/weather";
 
 export default function WeatherReport() {
   const [unit, setUnit] = useState<"celsius" | "fahrenheit">("celsius");
@@ -46,38 +46,6 @@ export default function WeatherReport() {
     isDay: data.current.is_day === 1,
   };
 
-  function getAirConditions(
-    data: Pick<WeatherData, "current" | "current_units">,
-  ) {
-    const { current, current_units } = data;
-
-    return {
-      feelsLike: {
-        label: "Feels like",
-        value: current.apparent_temperature,
-        unit: current_units.apparent_temperature,
-      },
-
-      humidity: {
-        label: "Humidity",
-        value: current.relative_humidity_2m,
-        unit: current_units.relative_humidity_2m,
-      },
-
-      windSpeed: {
-        label: "Wind speed",
-        value: current.wind_speed_10m,
-        unit: current_units.wind_speed_10m,
-      },
-
-      pressure: {
-        label: "Pressure",
-        value: current.pressure_msl,
-        unit: current_units.pressure_msl,
-      },
-    };
-  }
-
   return (
     <div className={s.theme} data-theme={theme}>
       <div className={s.report} data-theme={theme}>
@@ -102,10 +70,12 @@ export default function WeatherReport() {
               />
             </SegmentedControl>
           </div>
-
           <CurrentWeather current={currentWeather} city={city} />
           <TodayForecast hourly={data.hourly} timezone={timezone} unit={unit} />
-          <AirConditions data={getAirConditions(data)} />
+          <AirConditions
+            current={data.current}
+            currentUnits={data.current_units}
+          />{" "}
         </div>
 
         <div className={s.side}>

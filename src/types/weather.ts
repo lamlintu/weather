@@ -12,7 +12,7 @@ export interface WeatherData {
     wind_speed_10m: string;
     is_day: string;
     weather_code: string;
-    pressure_msl: string;
+    precipitation_probability: string;
   };
 
   current: {
@@ -24,7 +24,7 @@ export interface WeatherData {
     wind_speed_10m: number;
     is_day: 0 | 1;
     weather_code: number;
-    pressure_msl: number;
+    precipitation_probability: number;
   };
 
   hourly_units: {

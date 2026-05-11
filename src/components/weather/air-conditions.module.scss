@@ -8,4 +8,12 @@
 .conditions {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  padding-left: 2rem;
 }
