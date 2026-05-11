@@ -1,4 +1,3 @@
-// hooks/useGeoSearch.ts
 import { useQuery } from "@tanstack/react-query";
 
 export interface GeoResult {

@@ -3,7 +3,7 @@ import {
   SegmentedControl,
   SegmentedControlItem,
 } from "../common/segmented-control";
-import { useWeather } from "../hooks/use-weather";
+import { useWeather } from "../../hooks/use-weather";
 
 import { AirConditions } from "./air-conditions";
 import { CurrentWeather } from "./current-weather";

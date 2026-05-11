@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { WeatherData } from "../../types/weather";
+import type { WeatherData } from "../types/weather";
 
 const BASE_URL = "https://api.open-meteo.com/v1/forecast";
 const ONE_HOUR = 1000 * 60 * 60;

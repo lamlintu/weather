@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useGeoSearch } from "../hooks/use-geo-search";
+import { useGeoSearch } from "../../hooks/use-geo-search";
 import s from "./search-bar.module.scss";
 import type { GeoResult } from "../../types/weather";
 
