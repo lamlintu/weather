@@ -35,7 +35,7 @@ export function TodayForecast({ hourly, timezone, unit }: Props) {
 
       <div className={s.list}>
         {nextHours.map((hour) => (
-          <div className="grid align-items-center">
+          <div className={s.listItem}>
             <p>
               {new Date(hour.time).toLocaleTimeString("fi-FI", {
                 hour: "2-digit",

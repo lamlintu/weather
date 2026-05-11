@@ -9,3 +9,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+.listItem {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  gap: 1rem;
+}
