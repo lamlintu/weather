@@ -74,20 +74,24 @@ export function SearchBar({ onSelect }: Props) {
         </form>
       </search>
 
-      {data && query && (
+      {query && (
         <ul className={s.dropdown}>
-          {data.map((result) => (
-            <li
-              key={result.id}
-              className={s.item}
-              onClick={() => handleSelect(result)}
-            >
-              <span>
-                <strong>{result.name}</strong>
-                <p>{result.country}</p>
-              </span>
-            </li>
-          ))}
+          {data && data.length > 0 ? (
+            data.map((result) => (
+              <li
+                key={result.id}
+                className={s.item}
+                onClick={() => handleSelect(result)}
+              >
+                <span>
+                  <strong>{result.name}</strong>
+                  <p>{result.country}</p>
+                </span>
+              </li>
+            ))
+          ) : (
+            <li className={s.noResults}>No city found</li>
+          )}
         </ul>
       )}
     </div>
