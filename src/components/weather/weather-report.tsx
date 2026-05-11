@@ -1,18 +1,15 @@
 import { useState } from "react";
-import {
-  SegmentedControl,
-  SegmentedControlItem,
-} from "../common/segmented-control";
 import { useWeather } from "../../hooks/use-weather";
 
 import { AirConditions } from "./air-conditions";
 import { CurrentWeather } from "./current-weather";
 import { SearchBar } from "./search-bar";
 import { TodayForecast } from "./today-forecast";
+import { UnitToggle } from "./unit-toggle";
 import { WeekForecast } from "./week-forecast";
 
-import s from "./weather-report.module.scss";
 import type { GeoResult } from "../../types/weather";
+import s from "./weather-report.module.scss";
 
 export default function WeatherReport() {
   const [unit, setUnit] = useState<"celsius" | "fahrenheit">("celsius");
@@ -51,25 +48,7 @@ export default function WeatherReport() {
       <div className={s.report} data-theme={theme}>
         <div className={s.main}>
           <SearchBar onSelect={handleCitySelect} />
-          <div className="flex justify-flex-end">
-            <SegmentedControl>
-              <SegmentedControlItem
-                name="unit"
-                value="celsius"
-                label="°C"
-                checked={unit === "celsius"}
-                onChange={() => setUnit("celsius")}
-              />
-
-              <SegmentedControlItem
-                name="unit"
-                value="fahrenheit"
-                label="°F"
-                checked={unit === "fahrenheit"}
-                onChange={() => setUnit("fahrenheit")}
-              />
-            </SegmentedControl>
-          </div>
+          <UnitToggle unit={unit} onChange={setUnit} />
           <CurrentWeather current={currentWeather} city={city} />
           <TodayForecast hourly={data.hourly} timezone={timezone} unit={unit} />
           <AirConditions
