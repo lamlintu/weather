@@ -34,7 +34,6 @@ export default function WeatherReport() {
   };
 
   const theme = data.current.is_day === 1 ? "light" : "dark";
-  const timezone = data.timezone;
 
   const currentWeather = {
     temp: data.current.temperature_2m,
@@ -50,14 +49,19 @@ export default function WeatherReport() {
           <SearchBar onSelect={handleCitySelect} />
           <UnitToggle unit={unit} onChange={setUnit} />
           <CurrentWeather current={currentWeather} city={city} />
-          <TodayForecast hourly={data.hourly} timezone={timezone} unit={unit} />
+          <TodayForecast
+            hourly={data.hourly}
+            unit={unit}
+            utcOffsetSeconds={data.utc_offset_seconds}
+          />
           <AirConditions
             current={data.current}
             currentUnits={data.current_units}
-          />{" "}
+          />
         </div>
-
-        <WeekForecast daily={data.daily} unit={unit} />
+        <div>
+          <WeekForecast daily={data.daily} unit={unit} />
+        </div>
       </div>
     </div>
   );

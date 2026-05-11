@@ -4,6 +4,7 @@ export interface WeatherData {
   timezone: string;
   timezone_abbreviation: string;
   elevation: number;
+  utc_offset_seconds: number;
 
   current_units: {
     temperature_2m: string;

@@ -22,7 +22,6 @@ export function WeekForecast({ daily, unit }: Props) {
     code: daily.weather_code[index],
   }));
 
-  console.log(1232313, days);
   return (
     <article className={s.container}>
       <h2>7-day forecast</h2>
