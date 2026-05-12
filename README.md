@@ -19,6 +19,7 @@ A simple weather app that tells you what's going on outside at the moment, later
 - Sass with CSS Modules for styling
 - Vitest + React Testing Library for unit tests
 - Open-Meteo — a free weather API, no key required
+- GitHub Actions for CI/CD — runs tests and deploys to GitHub Pages on every push to `main`
 
 ## How to run locally
 
