@@ -1,17 +1,8 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import WeatherReport from "../weather-report";
 import mockData from "./__data__/weather-data.json";
-
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return ({ children }: { children: React.ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+import { createWrapper } from "@/tests/utils";
 
 describe("WeatherReport", () => {
   beforeEach(() => {
